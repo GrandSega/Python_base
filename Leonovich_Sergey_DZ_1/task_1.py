@@ -1,25 +1,31 @@
-print("Укажите количество секунд которое хотите конвертироовать :")
-duration = int(input())
-def convert_time(duration: int) -> str:
-    if duration >= 60:
-        min = int(duration / 60)
-        secunds = duration - (min * 60)
-        print(str(secunds) + " сек")
-        print(str(min) + " мин ")
+def convert_time(sec):
+    if sec >= 60:
+        min = int(sec / 60)
+        secunds = sec - (min * 60)
+        secunds_str = str(secunds) + " s."
+
+        if min >= 60:
+            hours = int(min / 60)
+            minuts = min - (hours * 60)
+            min_str = str(minuts) + " m. "
+            hours_str = str(hours) + " h. "
+
+            if hours >= 24:
+                days = int(hours / 24)
+                hours = hours - (days * 24)
+                hours_str = str(hours) + " h. "
+                days_str = str(days) + " d. "
+            else:
+                hours_str = str(hours) + " h. "
+                days_str = ""
+        else:
+            min_str = str(min) + " m. "
+            hours_str = ""
+
+        return days_str + hours_str + min_str + secunds_str
     else:
-        print(str(duration) + " сек")
-    hours = int(min / 60)
-    if hours > 0:
-        print(str(hours) + " час")
-        day = int(hours / 24)
-        if day > 0:
-            print(str(day) + " дн")
-    else:
-        print("Часы не найдены")
-    week = int(day / 7)
-    if week > 0:
-        print(str(week) + " нед")
-    else:
-        print("Недель не найдено")
-result = convert_time(duration)
-print(result)
+        return str(sec) + ' s.'
+
+
+duration = int(input("Укажитеколичество секунд: "))
+print(convert_time(duration))
